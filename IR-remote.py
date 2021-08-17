@@ -1,9 +1,10 @@
 import RPi.GPIO as GPIO
 from datetime import datetime
-
+import keyboard
 pin = 5
 Buttons = [0x300ff28d7,0x300ff08f7,0x300ff10ef,0x300ff12ed,0x300ff926d,0x300ff52ad,0x300fff00f,0x300ff50af,0x300ff7887,0x300ff42bd,0x300ffc837,0x300ff8a75,0x300ffc03f,0x300ff40bf,0x300ff609f,0x300ffe21d,0x300ffe01f,0x300ff02fd,0x300ffa25d,0x300ff22dd,0x300ff7a85,0x300ffc23d,0x300ff4ab5,0x300ffd22d,0x300ff629d,0x300ff906f,0x300ffb847,0x300fff807,0x300ffb04f,0x300ff9867,0x300ffd827,0x300ff8877,0x300ffa857,0x300ffe817,0x300ff48b7,0x300ff9a65,0x300ff827d,0x300ffda25,0x300ff6897,0x300ff708f,0x300ff58a7]
 ButtonsNames = ["POWER","BUZ.MUTE","C","E","SNELLAN","LOGMAR","NUMERICS",  "ALPHABETS","RED/GREEN","MADDOX","CONTRAST","PERIPHERALS","ISHIHARA","ACC","UP","LEFT","ENTER","RIGHT","MEDIA MUTE","DOWN","BACK","SETTINGS","LANG-1","LANG-2","MEDIA","SC1","SC2","SC3","SC4","ASTIG FAN","DOTS","PEDIATRIC","CARTOON","ANIMALS","LAN-1","LAN-2","EDUCATION","NOP 1","NOP 2","VOL-","VOL+"]
+key = ["","","","","","","","","","","","","","","up","left","enter","right","","down","backspace","I","","","","","","","","","","","","","","","","","","",""]
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(pin, GPIO.IN)
@@ -59,4 +60,6 @@ while True:
 	for button in range(len(Buttons)):
 		if hex(Buttons[button]) == inData:
 			print(ButtonsNames[button])
+			if (key[button] != ""):
+				keyboard.press_and_release(key[button])
 			
